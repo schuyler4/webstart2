@@ -20,9 +20,15 @@ class User(Base):
 	link_three = Column(String(500))
 	link_four = Column(String(500))
 	link_five = Column(String(500))
+	link_one_title = Column(String(100))
+	link_two_title = Column(String(100))
+	link_three_title = Column(String(100))
+	link_four_title = Column(String(100))
+	link_five_title = Column(String(100))
 	__tablename__ = "User"
 
-	def __init__(self, username, password, link_one, link_two, link_three, link_four, link_five):
+	def __init__(self, username, password, link_one, link_two, link_three, link_four, link_five
+				,link_one_title, link_two_title, link_three_title, link_four_title, link_five_title):
 		self.username = username
 		self.password = set_password(password)
 		self.link_one = link_one
@@ -30,6 +36,11 @@ class User(Base):
 		self.link_three = link_three
 		self.link_four = link_four
 		self.link_five = link_five
+		self.link_one_title =  link_one_title
+		self.link_two_title = link_two_title
+		self.link_three_title = link_three_title
+		self.link_four_title = link_four_title
+		self.link_five_title = link_five_title
 
 	def set_password(self, password):
 		self.pw_hash = generate_password_hash(password)
