@@ -1,0 +1,36 @@
+<h1>{{username}}</h1>
+{% if link_one or link_two or link_three or link_four or link_five %}
+	{% if link_one %}
+		<div id="link1">
+
+		</div>
+	{% endif %}
+	{% if link_one %}
+		<div id="link2">
+
+		</div>
+	{% endif %}
+	{% if link_one %}
+		<div id="link3">
+
+		</div>
+	{% endif %}
+	{% if link_one %}
+		<div id="link4">
+
+		</div>
+	{% endif %}
+	{% if link_one %}
+		<div id="link5">
+
+		</div>
+	{% endif %}
+{% else %}
+	<h1> you dont have any links yet </h1>
+{% endif %}
+<h4> add a link </h4>
+<form action="profile/{{username}}" method="POST">
+	<labal> link title <input type="text" name="link_title"></labal>
+	<label> link url <input type="text" name="link_url"></label>
+	<button type="submit"> add link </button>
+</form>

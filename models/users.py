@@ -30,7 +30,7 @@ class User(Base):
 	def __init__(self, username, password, link_one, link_two, link_three, link_four, link_five
 				,link_one_title, link_two_title, link_three_title, link_four_title, link_five_title):
 		self.username = username
-		self.password = set_password(password)
+		self.password = password
 		self.link_one = link_one
 		self.link_two = link_two
 		self.link_three = link_three
@@ -42,11 +42,8 @@ class User(Base):
 		self.link_four_title = link_four_title
 		self.link_five_title = link_five_title
 
-	def set_password(self, password):
-		self.pw_hash = generate_password_hash(password)
-
-	def check_password(self, password):
-		return check_password_hash(self.pw_hash, password)
+	def __repr__(self):
+		return "<User %r>" % user.username
 
 
 Base.metadata.create_all(engine)

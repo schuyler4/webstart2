@@ -1,0 +1,11 @@
+{% if logged_in %}
+	<h1> logged in as {{username}} would you like to <a href="/logout">logout</a></h1>
+{% else %}
+	<h1><a href="/login"> log in </a> or <a href="/signup">signup</a> </h1>
+{% endif %}
+
+<h1>Web Start</h1>
+<form action="home" method="post">
+	<input type="text" name="search_query">
+	<input type="submit">
+</form>

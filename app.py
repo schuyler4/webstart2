@@ -1,6 +1,6 @@
-from flask import Flask
+from flask import Flask, render_template
 from views.main import home
-from views.users import signup, login, profile
+from views.userViews import signup, login, profile, logout
 from urls.main import main
 
 app = Flask(__name__)
@@ -10,10 +10,10 @@ app.register_blueprint(main)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 
 app.add_url_rule('/', view_func= home.as_view('home'))
-app.add_url_rule('/login', view_func=signup.as_view('signup'))
-app.add_url_rule('/signup', view_func=login.as_view('login'))
+app.add_url_rule('/login', view_func=login.as_view('signup'))
+app.add_url_rule('/signup', view_func=signup.as_view('login'))
 app.add_url_rule('/profile/<username>', view_func=profile.as_view('profile'))
-
+app.add_url_rule('/logout', view_func=logout.as_view('logout'))
 
 if(__name__ == "__main__"):
 	app.run()
