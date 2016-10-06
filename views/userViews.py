@@ -3,6 +3,7 @@ from flask import Flask, render_template, session, flash, request, session, redi
 from models.users import User, db_session
 from sqlalchemy import *
 from sqlalchemy.orm import *
+import json
 
 
 class signup(MethodView):
@@ -73,37 +74,70 @@ class profile(MethodView):
 			link_three_title = user.link_three_title,
 			link_four_title = user.link_four_title,
 			link_five_title = user.link_five_title)
-
 		else:
 			return redirect('/login')
 
-	def post(self):
-		user = db_session.query(Usre).filter(User.username == username).first()
+	def post(self, username):
+		user = db_session.query(User).filter(User.username == username).first()
+
 		link_title = request.form['link_title']
 		link_url = request.form['link_url']
-		if(user.link_one == '' or user.link_two == '' or user.link_three == '' or user.link_four == '' or user.link_five == ''):
+		link_number = request.form['link_number']
+		
+		if link_number == 'link_1':
+			 new_link = update(User)
+			 new_link = new_link.values({"link_one":link_url, "link_one_title":link_title})
+			 new_link.where(User.username == username)
+			 try:
+			 	db_session.execute(new_link)
+			 	db_session.commit()
+			 except Exception as e:
+			 	db_session.rollback()
+			 	db_session.flush()
 
-			all_links_url = [user.link_one, user.link_two, user.link_three, user.link_four, user.link_five]
-			all_links_title = [user.link_one_title, user.link_two_title, user.link_three_title, user.link_four_title, user.link_five_title]
-
-			for link_url in all_links_url:
-				for link_title in all_links_title:
-					if link_url == None and link_title == None:
-						link_url = link_url
-						link_title = link_title
-
-			user.update({'link_one_title':'hello', 'link_one_url':'hello'})
-
+		elif link_number == 'link_2':
+			new_link = update(User)
+			new_link = new_link.values({"link_two":link_url, "link_two_title":link_title})
+			new_link.where(User.username == username)
 			try:
-				db_session.commit()
-				print("suckess")
+			 	db_session.execute(new_link)
+			 	db_session.commit()
 			except Exception as e:
-				print("failure")
-				db_session.rollback()
-				db_session.flush()
-	
-		else:
-			flash("all you links are used up")
+			 	db_session.rollback()
+			 	db_session.flush()
+
+		elif link_number == 'link_3':
+			new_link = update(User)
+			new_link = new_link.values({"link_three":link_url, "link_three_title":link_title})
+			new_link.where(User.username == username)
+			try:
+			 	db_session.execute(new_link)
+			 	db_session.commit()
+			except Exception as e:
+			 	db_session.rollback()
+			 	db_session.flush()
+
+		elif link_number == 'link_4':
+			new_link = update(User)
+			new_link = new_link.values({"link_four":link_url, "link_four_title":link_title})
+			new_link.where(User.username == username)
+			try:
+			 	db_session.execute(new_link)
+			 	db_session.commit()
+			except Exception as e:
+			 	db_session.rollback()
+			 	db_session.flush()
+
+		elif link_number == 'link_5':
+			new_link = update(User)
+			new_link = new_link.values({"link_five":link_url, "link_five_title":link_title})
+			new_link.where(User.username == username)
+			try:
+			 	db_session.execute(new_link)
+			 	db_session.commit()
+			except Exception as e:
+			 	db_session.rollback()
+			 	db_session.flush()
 		return redirect('profile/' + user.username)
 
 
