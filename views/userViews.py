@@ -138,7 +138,7 @@ class profile(MethodView):
 			except Exception as e:
 			 	db_session.rollback()
 			 	db_session.flush()
-		return redirect('profile/' + user.username)
+		return redirect('profile/' + session.get('username'));
 
 
 class logout(MethodView):
